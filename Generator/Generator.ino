@@ -46,6 +46,8 @@ void loop() {
    batteryVoltage = analogData * (3.3/1023.0) * (13.3/3.3);             //CAMBIO 5: se calcula el voltaje en A0. Luego, se calcula el voltaje de batería usando el divisor de voltaje.
    Serial.println(batteryVoltage);
    Serial.println(batteryVoltage);
+   generatorStateON();
+   generatorStateOFF();
    if(generatorRunning){  //CMOS                                              CAMBIO 6: se quitó la comparación de voltaje que existía en el IF por una verificación lógica.
       generatorState = true;
    }
@@ -61,9 +63,7 @@ void loop() {
   delay(5000);
 }
 
-// ---------------------------- esta parte es vestigial, se usaba para mandar datos CUANDO se apagara o encendiera el MG --------------------
-
-/*void generatorStateON(){
+void generatorStateON(){
 
     HTTPClient http;    //Declare object of class HTTPClient
     
@@ -112,7 +112,7 @@ void generatorStateOFF(){
   
 }
 
-*/
+
 
 void sendBattery(){                                        
 

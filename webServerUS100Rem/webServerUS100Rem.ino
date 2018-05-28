@@ -11,9 +11,9 @@ const float pi = 3.1416;
 #define RX  4
 #define TX  5
 
-float DIAMETER = /*147.32 */ 56.5;
-float LENGTH = /*182.88 */ 86.5;
-int MAXVOLUME = 823;
+float DIAMETER = 146; /* 56.5*/;
+float LENGTH = 180.9; /* 86.5*/
+int MAXVOLUME = 800;
 
 struct datapoint {
    float distance;
@@ -154,8 +154,8 @@ struct datapoint leerSonnar(){
 
   valorH = measureDistance();
   volume = calcVol(valorH , radius, len);          // Se calcula el volumen de combustible, ya convertido a galones.
-  Serial.println("Volumen calculado, en galones:");
-  Serial.println(volume);
+  //Serial.println("Volumen calculado, en galones:");
+  //Serial.println(volume);
   /*volume = volume * 14.39;   */                              //simulacion de laboratorio
   res.distance = valorH;
   Serial.println("Distancia al Combustible (cm): ");
@@ -206,7 +206,7 @@ float measureDistance() {
 }
  
 float calcVol(float h, float r, float l) {
-  Serial.print("Altura actual: ");
+  Serial.print("Diametro actual: ");
   Serial.println(DIAMETER);
   Serial.print("Longitud actual: ");
   Serial.println(LENGTH);
@@ -214,7 +214,7 @@ float calcVol(float h, float r, float l) {
   if (h <= (2*r) && h >= 0) {
     vol = (pi*r*r - r*r*acos((r-h)/r) + (r-h)*sqrt(2*r*h-h*h))*l* 0.000264172;
   } else {
-    vol = 0.001;
+    vol = 0.01;
   }
   return vol;
 }
